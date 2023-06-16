@@ -14,25 +14,7 @@ namespace AutoService.WebUI.Repositories
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-            builder.Entity<Role>().HasData(new Role
-            {
-                Id = 1,
-                Name = "Admin",
-
-            });
-            builder.Entity<User>().HasData(new User
-            {
-                Id = 1,
-                Name = "Admin",
-                Email = "admin@gmail.com",
-                Password = "123456",               
-                RoleId=1,
-                UserName="Admin",
-                Surname="Admin",
-                PhoneNum="0535 123 45 67",
-                IsActive=true,             
-
-            });
+           
             base.OnModelCreating(builder);
         }
 

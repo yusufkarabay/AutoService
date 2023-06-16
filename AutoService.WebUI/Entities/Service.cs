@@ -9,7 +9,7 @@
         public string ServiceNotes { get; set; }
         public bool IsUnderWarranty { get; set; }
       
-        public int CarId { get; set; }
+        public Guid CarId { get; set; }
         public virtual Car Car { get; set; }
     }
 }

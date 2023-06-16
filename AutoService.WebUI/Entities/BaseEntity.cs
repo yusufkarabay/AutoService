@@ -4,12 +4,12 @@ namespace AutoService.WebUI.Entities
 {
     public interface IBaseEntity
     {
-         int Id { get; set; }
+         Guid Id { get; set; }
     }
 
     public class BaseEntity : IBaseEntity
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
     }
 }

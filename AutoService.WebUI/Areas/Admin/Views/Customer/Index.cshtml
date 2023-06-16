@@ -1,0 +1,82 @@
+﻿@model IEnumerable<AutoService.WebUI.Entities.Customer>
+
+@{
+    ViewData["Title"] = "Müşteriler";
+}
+
+<h1>Müşteriler</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Müşteri Ekle</a>
+</p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Adı
+                </th>
+                <th>
+                    Soyadı
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Kimlik Numarası
+                </th>
+                <th>
+                    Telefon
+                </th>
+                <th>
+                    Adres
+                </th>
+
+                <th>
+                    Notlar
+                </th>
+                <th>
+                    Araç
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+     
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdentityNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Phone)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Car.Model)
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

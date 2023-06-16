@@ -16,7 +16,7 @@ namespace AutoService.WebUI.Repositories.EfPostgresql
         }
 
 
-        public IQueryable<T> GetAll()
+        public  IQueryable<T> GetAllAsync()
         {
             return _context.Set<T>().AsNoTracking().AsQueryable();
         }
@@ -37,16 +37,15 @@ namespace AutoService.WebUI.Repositories.EfPostgresql
             return Task.CompletedTask;
         }
 
-        public async Task DeleteAsync(T entity)
+        public Task DeleteAsync(T entity)
         {
             _context.Remove(entity);
-            _unitOfWork.SaveChangesAsync();
+            return Task.CompletedTask;
         }
 
         public async Task<T> FindAsync(Expression<Func<T, bool>> conditions)
         {
-            var result = await DatasetAsNoTracking.Where(conditions).FirstOrDefaultAsync();
-            return result;
+            return await DatasetAsNoTracking.Where(conditions).FirstOrDefaultAsync();
         }
     }
 }

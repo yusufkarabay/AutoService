@@ -10,7 +10,7 @@
         public bool IsAvailable { get; set; }
         public string Notes { get; set; }
         public string Plate { get; set; }
-        public int BrandId { get; set; }
+        public Guid BrandId { get; set; }
         public virtual Brand Brand { get; set; }
 
     }

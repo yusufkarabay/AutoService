@@ -7,5 +7,7 @@ namespace AutoService.WebUI.Repositories.EfPostgresql
         public RoleRepository(AutoServiceDbContext context, IUnitOfWork unitOfWork) : base(context, unitOfWork)
         {
         }
+
+
     }
 }
