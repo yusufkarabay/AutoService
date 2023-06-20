@@ -4,7 +4,7 @@ namespace AutoService.WebUI.Repositories
 {
     public interface IGenericRepository<T> where T : class
     {
-        IQueryable<T> GetAll();
+        IQueryable<T>  GetAllAsync();
         Task<List<T>> SearchAsync(Expression<Func<T, bool>> conditions);
         Task AddAsync(T entity);
         Task UpdateAsync(T entity);

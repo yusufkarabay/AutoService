@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AutoService.WebUI.Entities.Sale>
+
+@{
+    ViewData["Title"] = "Satış";
+}
+
+<h1>Satış</h1>
+
+<p>
+    <a class="btn btn-outline-primary" asp-action="Create">Satış Ekle</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+              Fiyat
+            </th>
+            <th>
+               Satış Tarihi
+            </th>
+            <th>
+                Araç
+            </th>
+            <th>
+               Müşteri
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaleDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Car.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Customer.Id)
+            </td>
+            <td>
+                    <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.Id">Sil</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

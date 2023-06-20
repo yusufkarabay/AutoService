@@ -1,4 +1,6 @@
-﻿namespace AutoService.WebUI.Entities
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace AutoService.WebUI.Entities
 {
     public class User : BaseEntity
     {
@@ -9,8 +11,9 @@
         public string PhoneNum { get; set; }
         public string UserName { get; set; }
         public bool IsActive { get; set; }
+        [Display(Name = "Oluşturulma Tarihi"), ScaffoldColumn(false)]
         public DateTime? CreatedDate { get; set; }=DateTime.UtcNow;
-        public int RoleId { get; set; }
+        public Guid RoleId { get; set; }
         public virtual Role Role { get; set; }
     }
 
