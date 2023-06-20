@@ -2,9 +2,9 @@
 {
     public class Sale:BaseEntity
     {
-        public decimal Price { get; set; }
-        public DateTime? SaleDate { get; set; }=DateTime.UtcNow;
-        public int CarId { get; set; }
+        public int Price { get; set; }
+        public DateTime? SaleDate { get; set; }
+        public Guid CarId { get; set; }
         public virtual Car Car { get; set; }
         public Guid CustomerId { get; set; }
         public virtual Customer Customer { get; set; }

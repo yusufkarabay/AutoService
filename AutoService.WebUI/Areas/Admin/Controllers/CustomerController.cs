@@ -4,6 +4,7 @@ using AutoService.WebUI.Repositories.EfPostgresql;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Drawing.Drawing2D;
 
 namespace AutoService.WebUI.Areas.Admin.Controllers
 {
@@ -24,7 +25,8 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
         // GET: CustomerController
         public async Task<IActionResult> Index()
         {
-            var customers =  _customerRepository.GetAllAsync();
+            ViewBag.CarId= new SelectList(_carRepository.GetAllAsync(), "Id", "Model");
+            var customers = _customerRepository.GetAllAsync();
             return View(customers);
 
 
@@ -40,7 +42,7 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> Create()
         {
             ViewBag.CarId= new SelectList(_carRepository.GetAllAsync(), "Id", "Model");
-          
+
             return View();
         }
 
@@ -61,25 +63,27 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
                 ModelState.AddModelError("", "Hata oluştu");
             }
 
-            ViewBag.CarId = new SelectList( _carRepository.GetAllAsync(), "Id", "Model");
+            ViewBag.CarId = new SelectList(_carRepository.GetAllAsync(), "Id", "Model");
             return RedirectToAction(nameof(Index));
         }
 
         // GET: CustomerController/Edit/5
         public async Task<IActionResult> Edit(Guid id)
         {
-            ViewBag.CarId = new SelectList( _carRepository.GetAllAsync(), "Id", "Model");
-            var customer = await _customerRepository.FindAsync(x=>x.Id==id);
+            ViewBag.CarId = new SelectList(_carRepository.GetAllAsync(), "Id", "Model");
+            var customer = await _customerRepository.FindAsync(x => x.Id==id);
             return View(customer);
         }
 
         // POST: CustomerController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(Guid id, Customer customer)
         {
             try
             {
+                await _customerRepository.UpdateAsync(customer);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -89,18 +93,22 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
         }
 
         // GET: CustomerController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
-            return View();
+            var model = await _customerRepository.FindAsync(x => x.Id==id);
+            return View(model);
         }
+
 
         // POST: CustomerController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(Guid id, Customer customer)
         {
             try
             {
+                await _customerRepository.DeleteAsync(customer);
+                await _unitOfWork.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
             catch

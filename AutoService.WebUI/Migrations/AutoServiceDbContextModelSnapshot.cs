@@ -147,24 +147,21 @@ namespace AutoService.WebUI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("CarId1")
+                    b.Property<Guid>("CarId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("SaleDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId1");
+                    b.HasIndex("CarId");
 
                     b.HasIndex("CustomerId");
 
@@ -279,7 +276,7 @@ namespace AutoService.WebUI.Migrations
                 {
                     b.HasOne("AutoService.WebUI.Entities.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId1")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

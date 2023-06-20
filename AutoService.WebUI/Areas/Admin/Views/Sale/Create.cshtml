@@ -1,0 +1,39 @@
+﻿@model AutoService.WebUI.Entities.Sale
+
+@{
+    ViewData["Title"] = "Ekle";
+}
+
+<h1>Ekle</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label">Fiyat</label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SaleDate" class="control-label">Satış Tarihi</label>
+                <input asp-for="SaleDate" class="form-select" />
+                <span asp-validation-for="SaleDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CarId" class="control-label">Araç</label>
+                <select asp-for="CarId" class ="form-select" asp-items="ViewBag.CarId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label">Müşteri</label>
+                <select asp-for="CustomerId" class ="form-select" asp-items="ViewBag.CustomerId"></select>
+            </div>
+            <div class="form-group mt-4">
+                <input type="submit" value="Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+

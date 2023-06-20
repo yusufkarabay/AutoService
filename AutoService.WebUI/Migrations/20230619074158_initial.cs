@@ -98,7 +98,6 @@ namespace AutoService.WebUI.Migrations
                     IdentityNumber = table.Column<string>(type: "text", nullable: false),
                     Phone = table.Column<string>(type: "text", nullable: false),
                     Address = table.Column<string>(type: "text", nullable: false),
-                    PhoneNum = table.Column<string>(type: "text", nullable: false),
                     Notes = table.Column<string>(type: "text", nullable: false),
                     CarId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -144,16 +143,15 @@ namespace AutoService.WebUI.Migrations
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     SaleDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
-                    CarId = table.Column<int>(type: "integer", nullable: false),
-                    CarId1 = table.Column<Guid>(type: "uuid", nullable: false),
+                    CarId = table.Column<Guid>(type: "uuid", nullable: false),
                     CustomerId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Sales", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sales_Cars_CarId1",
-                        column: x => x.CarId1,
+                        name: "FK_Sales_Cars_CarId",
+                        column: x => x.CarId,
                         principalTable: "Cars",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -176,9 +174,9 @@ namespace AutoService.WebUI.Migrations
                 column: "CarId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sales_CarId1",
+                name: "IX_Sales_CarId",
                 table: "Sales",
-                column: "CarId1");
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_CustomerId",

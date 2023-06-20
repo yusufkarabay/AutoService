@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutoService.WebUI.Migrations
 {
     [DbContext(typeof(AutoServiceDbContext))]
-    [Migration("20230614130816_initial")]
-    partial class initial
+    [Migration("20230620060750_sale edit")]
+    partial class saleedit
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -118,10 +118,6 @@ namespace AutoService.WebUI.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("PhoneNum")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Surname")
                         .IsRequired()
                         .HasColumnType("text");
@@ -154,24 +150,21 @@ namespace AutoService.WebUI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("CarId1")
+                    b.Property<Guid>("CarId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CustomerId")
                         .HasColumnType("uuid");
 
-                    b.Property<decimal>("Price")
-                        .HasColumnType("numeric");
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
 
                     b.Property<DateTime?>("SaleDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId1");
+                    b.HasIndex("CarId");
 
                     b.HasIndex("CustomerId");
 
@@ -286,7 +279,7 @@ namespace AutoService.WebUI.Migrations
                 {
                     b.HasOne("AutoService.WebUI.Entities.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId1")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

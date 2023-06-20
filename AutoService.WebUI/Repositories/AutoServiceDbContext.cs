@@ -1,5 +1,6 @@
 ﻿using AutoService.WebUI.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace AutoService.WebUI.Repositories
 {
@@ -14,7 +15,9 @@ namespace AutoService.WebUI.Repositories
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-           
+     
+
+
             base.OnModelCreating(builder);
         }
 
@@ -26,6 +29,6 @@ namespace AutoService.WebUI.Repositories
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
-       
+
     }
 }

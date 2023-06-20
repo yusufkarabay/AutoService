@@ -3,7 +3,7 @@ using AutoService.WebUI.Repositories.EfPostgresql;
 using AutoService.WebUI.Service;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
-
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -19,7 +19,13 @@ builder.Services.AddScoped<ISaleRepository, SaleRepository>();
 builder.Services.AddScoped<IServiceRepository, ServiceRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 
-
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.LogoutPath = "/Account/Logout";
+        options.AccessDeniedPath = "/Account/AccessDenied";
+    });
 
 
 builder.Services.AddScoped<IBrandService, BrandService>();

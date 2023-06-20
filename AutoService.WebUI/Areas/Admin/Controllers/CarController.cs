@@ -27,6 +27,8 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
         // GET: CarController
         public async Task<IActionResult> Index()
         {
+            ViewBag.BrandId=new SelectList(_brandRepository.GetAllAsync(), "Id", "Name");
+        
             var cars = _carRepository.GetAllAsync();
             return View(cars);
         }
@@ -83,6 +85,7 @@ namespace AutoService.WebUI.Areas.Admin.Controllers
             }
             catch
             {
+                ViewBag.BrandId=new SelectList(_brandRepository.GetAllAsync(), "Id", "Name");
                 return View();
             }
         }

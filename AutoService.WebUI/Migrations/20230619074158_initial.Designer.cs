@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace AutoService.WebUI.Migrations
 {
     [DbContext(typeof(AutoServiceDbContext))]
-    [Migration("20230616115143_customer edited")]
-    partial class customeredited
+    [Migration("20230619074158_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -150,10 +150,7 @@ namespace AutoService.WebUI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<int>("CarId")
-                        .HasColumnType("integer");
-
-                    b.Property<Guid>("CarId1")
+                    b.Property<Guid>("CarId")
                         .HasColumnType("uuid");
 
                     b.Property<Guid>("CustomerId")
@@ -167,7 +164,7 @@ namespace AutoService.WebUI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId1");
+                    b.HasIndex("CarId");
 
                     b.HasIndex("CustomerId");
 
@@ -282,7 +279,7 @@ namespace AutoService.WebUI.Migrations
                 {
                     b.HasOne("AutoService.WebUI.Entities.Car", "Car")
                         .WithMany()
-                        .HasForeignKey("CarId1")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
